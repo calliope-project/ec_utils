@@ -1,22 +1,18 @@
-# eurocalliopelib
+# ec_utils (originally eurocalliopelib)
 
-Library code of the Euro-Calliope workflow.
+Utility code for the `ec_modules`.
 
-The library code contains general-purpose functions and routines that we expect to change at a slow pace -- in contrast to scripts. If you alter library code be aware that this will not trigger reruns of workflow rules. Think of `eurocalliopelib` as any other dependency of this workflow (like NumPy): changing the version of any dependency will not rerun worfklow rules. When you change library code, you will have to rerun rules manually where needed.
+Contains general-purpose functions and routines that we expect to change at a slow pace. Think of this as any other dependency in your workflow.
 
-## Developer Guide
+To use it, add the following to the relevant `environment.yaml` in your module:
 
-The following assumes you are in the root folder of this repository, i.e. the parent folder of the folder this file is in.
-
-### Installation
-
-Best install `eurocalliopelib` from the conda environment:
-
-    $ conda env create -f requirements-test.yaml
-    $ conda activate test-eurocalliope
-
-### Run the test suite
-
-Run the test suite with py.test:
-
-    $ py.test tests/lib
+```yaml
+name: your-environment
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - pip
+  - pip:
+    - "git+https://github.com/calliope-project/ec_utils.git@0.1.0"
+```
