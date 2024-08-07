@@ -14,5 +14,5 @@ channels:
 dependencies:
   - pip
   - pip:
-    - "git+https://github.com/calliope-project/ec_utils.git@0.1.0"
+    - "git+https://github.com/calliope-project/ec_utils.git@v0.1.0"
 ```
