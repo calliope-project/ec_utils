@@ -3,31 +3,25 @@
 from setuptools import find_packages, setup
 
 setup(
-    name="eurocalliopelib",
-    version="1.2.0.dev",  # additionally defined in __init__.py
-    description="Library code of the Euro-Calliope workflow.",
+    name="ec_utils",
+    version="0.1.0",  # additionally defined in __init__.py
+    description="Utilities for ec_modules.",
     maintainer="calliope-project",
-    maintainer_email="tim.troendle@usys.ethz.ch",
+    maintainer_email="ivan.ruizmanuel@tudelft.nl",
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-        # "numpy", # TODO readd after solving #262
-        # "scipy", # TODO readd after solving #262
-        # "pandas", # TODO readd after solving #262
-        # "xarray", # TODO readd after solving #262
-        # "pycountry==18.12.8" # TODO readd after solving #262
+        "numpy", # TODO readd after solving #262
+        "scipy", # TODO readd after solving #262
+        "pandas", # TODO readd after solving #262
+        "xarray", # TODO readd after solving #262
+        "pycountry==18.12.8" # TODO readd after solving #262
     ],
     extras_require={
         "geo": [
-            # "geopandas", # TODO readd after solving #262
-            # "rasterio", # TODO readd after solving #262
-            # "rasterstats", # TODO readd after solving #262
-        ],
-        "docs": [
-            # "pydot", # TODO readd after solving #262
-            # "graphviz", # TODO readd after solving #262
-            # "mkdocs", # TODO readd after solving #262
-            # "jsonschema2md" # TODO readd after solving #262
+            "geopandas", # TODO readd after solving #262
+            "rasterio", # TODO readd after solving #262
+            "rasterstats", # TODO readd after solving #262
         ],
     },
     entry_points={
