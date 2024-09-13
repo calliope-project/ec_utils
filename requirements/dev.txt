@@ -1,0 +1,4 @@
+ruff
+codespell
+pytest
+ipykernel

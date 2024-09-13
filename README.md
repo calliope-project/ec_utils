@@ -16,3 +16,12 @@ dependencies:
   - pip:
     - "git+https://github.com/calliope-project/ec_utils.git@v0.1.0"
 ```
+
+## Development
+
+We recommend using `mamba` for development.
+
+```bash
+mamba create -n ec_utils --file requirements/base.txt --file requirements/geo.txt --file requirements/dev.txt
+pip install --no-deps -e .
+```
