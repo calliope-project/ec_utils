@@ -5,12 +5,11 @@ from pathlib import Path
 import jinja2
 import numpy as np
 
-from eurocalliopelib import filters
+from ec_utils import filters
 
 
 def parametrise_template(path_to_template, path_to_output_yaml, **kwargs):
     """Applies config parameters to template files."""
-
     kwargs = _update_kwargs(**kwargs)
     path_to_template = Path(path_to_template)
     env = jinja2.Environment(
@@ -18,7 +17,7 @@ def parametrise_template(path_to_template, path_to_output_yaml, **kwargs):
         lstrip_blocks=True,
         trim_blocks=True,
         keep_trailing_newline=True,
-        undefined=jinja2.StrictUndefined,  # This ensures that missing pandas index elements raise an exception instead of silently returning None
+        undefined=jinja2.StrictUndefined,  # missing pandas indexes will raise exception
     )
     env.filters["unit"] = filters.unit
     env.globals["mean"] = np.mean

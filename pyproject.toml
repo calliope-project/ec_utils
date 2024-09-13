@@ -62,7 +62,6 @@ split-on-trailing-comma = false
 convention = "google"
 
 [tool.ruff.lint.pycodestyle]
-max-doc-length = 200
 ignore-overlong-task-comments = true
 
 [tool.ruff.format]

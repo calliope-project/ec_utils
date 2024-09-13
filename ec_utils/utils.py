@@ -12,7 +12,8 @@ LOGGER = logging.getLogger(__name__)
 
 def eu_country_code_to_iso3(eu_country_code):
     """Converts EU country code to ISO 3166 alpha 3.
-    The European Union uses its own country codes, which often but not always match ISO 3166.
+
+    The European Union uses its own country codes, which do not always match ISO 3166.
     """
     assert (
         len(eu_country_code) == 2
@@ -25,12 +26,10 @@ def convert_country_code(
     input_country: str,
     output: Literal["alpha2", "alpha2_eu", "alpha3", "name"] = "alpha3",
 ) -> str:
-    """
-    Converts input country code or name into a 2- or 3-letter code or a normalised pycountry name.
-
+    """Converts input country code into pycountry names or alpha codes.
 
     Args:
-        input_country (str): Country code/name to convert. Can accept an EU country code.
+        input_country (str): Country code/name to convert. Can accept EU country codes.
         output (Literal[alpha2, alpha2_eu, alpha3, name], optional):
             Output format. Defaults to "alpha3". Options:
 
@@ -42,7 +41,6 @@ def convert_country_code(
     Returns:
         str: Input country converted to output format.
     """
-
     if input_country.lower() == "el":
         input_country = "gr"
     elif input_country.lower() == "uk":
@@ -79,23 +77,24 @@ def convert_valid_countries(
     output: str = "alpha3",
     errors: Literal["raise", "ignore"] = "raise",
 ) -> dict:
-    """
-    Map a list of country codes / names to uniform ISO coded country codes / pycountry names.
-    If an input item isn't a valid country (e.g. "EU27") then raise an error or skip and print the code and continue.
+    """Map country codes / names to uniform ISO country codes / pycountry names.
 
     Args:
         country_codes (list):
-            Strings defining country codes / names (["France", "FRA", "FR"] will all be treated the same)
+            Strings defining country codes / names.
+            E.g., ["France", "FRA", "FR"] will all be treated the same.
         output (str, optional):
             pycountry output type, e.g. `alpha3` for 3-letter ISO standard.
             Defaults to "alpha3".
-        errors (Literal["raise", "ignore"], optional).
-            If country code is not valid, `raise` an error and stop or `ignore` the error and continue with only logging the code.
-            Defaults to "ignore".
-    Returns:
-        dict: Mapping from input country code/name to output country code for all valid input countries
-    """
+        errors (Literal["raise", "ignore"], optional):
+            `raise` or `ignore` invalid country codes. Defaults to "raise".
 
+    Raises:
+        err: invalid country code detected, and `errors == 'raise'`.
+
+    Returns:
+        dict: Mapping from input countries to output countries for all valid cases.
+    """
     mapped_codes = {}
     for country_code in country_codes:
         try:
@@ -119,8 +118,10 @@ def rename_and_groupby(
     dropna: bool = False,
     drop_other_dim_items: bool = True,
 ) -> xr.DataArray:
-    """
-    Take an xarray dataarray and rename the contents of a given dimension as well as (optionally) rename that dimension.
+    """Rename DataArray contents of a given dimension.
+
+    Optionally, rename that dimension.
+
     If renaming the contents has some overlap (e.g. {'FRA': 'DEU', 'CHE': 'DEU'}),
     then the returned dataarray will be grouped over the new dimension items and summed.
 
@@ -128,17 +129,19 @@ def rename_and_groupby(
         da (xr.DataArray):
             Input dataarray with the dimension `dim_name`.
         rename_dict (dict):
-            Dictionary to map items in the dimension `dim_name` to new names ({"old_item_name": "new_item_name"}).
+            remap items in `dim_name` to new names ({"old": "new"}).
         dim_name (str):
             Dimension on which to rename items.
         new_dim_name (Optional[str], optional): Defaults to None.
             If not None, rename the dimension "dim_name" to the given string.
         dropna (bool, optional): Defaults to False.
-            If True, drop any items in "dim_name" after renaming/grouping which have all NaN values along all other dimensions.
+            If True, drop items in "dim_name" with all NaN values in other dimensions.
         drop_other_dim_items (bool, optional): Defaults to True.
-            If True, any dimension items _not_ referenced in `rename_dict` keys will be removed from that dimension in the returned array.
+            If True, dimension items not referenced in `rename_dict` keys will be
+            removed from that dimension in the returned array.
+
     Returns:
-        (xr.DataArray): Same as "da" but with the items in "dim_name" renamed and possibly a. grouped and summed, b. "dim_name" itself renamed.
+        (xr.DataArray): modified DataArray.
     """
     rename_series = pd.Series(rename_dict).rename_axis(index=dim_name)
     if drop_other_dim_items is False:
@@ -168,25 +171,25 @@ def rename_and_groupby(
 
 
 def ktoe_to_twh(array):
-    """Convert KTOE to TWH"""
+    """Convert KTOE to TWH."""
     return array * 1.163e-2
 
 
 def gwh_to_tj(array):
-    """Convert GWh to TJ"""
+    """Convert GWh to TJ."""
     return array * 3.6
 
 
 def pj_to_twh(array):
-    """Convert PJ to TWh"""
+    """Convert PJ to TWh."""
     return array / 3.6
 
 
 def tj_to_twh(array):
-    """Convert TJ to TWh"""
+    """Convert TJ to TWh."""
     return pj_to_twh(array) / 1000
 
 
 def tj_to_ktoe(array):
-    """Convert TJ to Ktoe"""
+    """Convert TJ to Ktoe."""
     return array * 23.88e-3
