@@ -10,7 +10,7 @@ def _modularise_rulegraph(
 ) -> nx.DiGraph:
     """Wrap module rules into a single rule with a special marker.
 
-    Prefixes are necessary to distinguish models from regular rules.
+    Prefixes are necessary to distinguish modules from regular rules.
     """
     labels = nx.get_node_attributes(rulegraph, "label")
     # Ensure labels are clean strings
