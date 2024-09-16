@@ -23,5 +23,6 @@ We recommend using `mamba` for development.
 
 ```bash
 mamba create -n ec_utils --file requirements/base.txt --file requirements/geo.txt --file requirements/dev.txt
+mamba activate ec_utils
 pip install --no-deps -e .
 ```
