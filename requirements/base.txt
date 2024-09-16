@@ -1,0 +1,7 @@
+numpy
+scipy
+pydot
+pandera
+xarray
+networkx
+pycountry == 18.12.8
