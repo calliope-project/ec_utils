@@ -40,7 +40,7 @@ def _modularise_snakemake_graph(
 
 
 def write_snakemake_modulegraph_png(
-    snakemake_dotfile: Path | str, output_path: Path | str, prefixes: str|list[str]
+    snakemake_dotfile: Path | str, output_path: Path | str, prefixes: str | list[str]
 ):
     """Create a PNG file with a simplified DAG with a single rule per module.
 

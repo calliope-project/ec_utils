@@ -117,4 +117,4 @@ digraph snakemake_dag {
 	4 -> 45
 	47 -> 46
 	49 -> 48
-}            
+}

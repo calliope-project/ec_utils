@@ -1,19 +1,20 @@
-import ec_utils.modules as modules
 import networkx as nx
 import pytest
 
+import ec_utils.modules as modules
 
-@pytest.fixture()
+
+@pytest.fixture
 def rulegraph_path():
     return "tests/_example_files/rulegraph.dot"
 
 
-@pytest.fixture()
+@pytest.fixture
 def rulegraph(rulegraph_path):
     return nx.DiGraph(nx.nx_pydot.read_dot(rulegraph_path))
 
 
-@pytest.fixture()
+@pytest.fixture
 def modulegraph_path(tmp_path):
     return tmp_path / "modulegraph.png"
 
